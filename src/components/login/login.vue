@@ -36,13 +36,15 @@ export default {
       // 希望让异步操作的代码，看起来像同步代码
       // ES7 async+await
       const res = await this.$http.post("login", this.formdata);
-      // console.log(res);
+      console.log(res);
       const {
         data,
         meta: { msg, status }
       } = res.data;
       if (status === 200) {
         // 登录成功
+        // 保存后台返回的token
+        localStorage.setItem("token", data.token);
         // 1.跳转home
         this.$router.push({ name: "home" });
         // 2.提示成功
