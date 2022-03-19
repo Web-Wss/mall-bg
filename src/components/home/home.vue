@@ -91,7 +91,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  // newVue之前自动触发
+  beforeCreate() {
+    // token没有 登录
+    // 获取token
+    const token = localStorage.getItem("token");
+    // if token 没有  登录
+    if (!token) {
+      this.$router.push({ name: "login" });
+    }
+    // if token有 继续渲染
+  }
+};
 </script>
 
 <style>
