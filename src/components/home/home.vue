@@ -42,7 +42,11 @@
             </template>
             <el-menu-item index="1-1">
               <i class="el-icon-location"></i>
-              <span>选项一</span>
+              <span>角色列表</span>
+            </el-menu-item>
+            <el-menu-item index="1-1">
+              <i class="el-icon-location"></i>
+              <span>权限列表</span>
             </el-menu-item>
           </el-submenu>
           <!-- 3 -->
@@ -126,17 +130,17 @@ export default {
   height: 100%;
 }
 .header {
-  background-color: #b3c0d1;
+  background-color: #ececec;
 }
 .header .logo img {
   width: 50%;
   height: 60px;
 }
 .aside {
-  background-color: #d3dce6;
+  background-color: #ffffff;
 }
 .main {
-  background-color: #e9eef3;
+  background-color: #e4e4e4;
 }
 /* 头部样式 */
 .middle {

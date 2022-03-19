@@ -81,7 +81,7 @@ export default {
 <style>
 .login-wrap {
   height: 100%;
-  background-color: #324152;
+  background-color: #ececec;
   /* 弹性盒模型 */
   display: flex;
   justify-content: center;
