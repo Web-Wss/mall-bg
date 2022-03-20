@@ -3,7 +3,7 @@
     <!-- 面包屑 -->
     <!-- /首页 / 用户管理 / 用户列表/ -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
       <el-breadcrumb-item>用户列表</el-breadcrumb-item>
     </el-breadcrumb>
@@ -89,7 +89,7 @@
       @current-change="handleCurrentChange"
       :current-page="pagenum"
       :page-sizes="[2, 4, 6, 8]"
-      :page-size="2"
+      :page-size="6"
       layout="total, sizes, prev, pager, next, jumper"
       :total="total"
     >
@@ -177,14 +177,17 @@ export default {
       // 表格绑定的数据
       userlist: [],
       // 分页相关数据
+      // 当前页面
       pagenum: 1,
-      pagesize: 2,
+      // 每一页的数据个数
+      pagesize: 6,
+      // 数据总数
       total: -1,
-      // 添加对话框的属性
+      // 添加用户对话框 的属性
       dialogFormVisibleAdd: false,
-      // 编辑对话框
+      // 编辑用户对话框 的属性
       dialogFormVisibleEdit: false,
-      // 分配角色对话框
+      // 分配角色对话框 的属性
       dialogFormVisibleRol: false,
       // 添加用户的表单数据
       form: {
@@ -201,9 +204,11 @@ export default {
       roles: []
     };
   },
+  // 在实例创建完后立即调用
   created() {
     this.getUsersList();
   },
+
   methods: {
     // 分配角色 --发送请求
     async setRole() {
@@ -214,6 +219,7 @@ export default {
       // 关闭对话框
       this.dialogFormVisibleRol = false;
     },
+
     // 分配角色，打开对话框
     async showSetUseerRoleDia(user) {
       this.currUsername = user.username;
@@ -227,6 +233,7 @@ export default {
       this.currRoleId = res.data.data.rid;
       this.dialogFormVisibleRol = true;
     },
+
     // 修改状态
     async changeMsState(user) {
       // 发送请求
@@ -235,6 +242,7 @@ export default {
       );
       console.log(res);
     },
+
     // 编辑用户 发送请求
     async EditUser() {
       const res = await this.$http.put(`users/${this.form.id}`, this.form);
@@ -244,11 +252,13 @@ export default {
       // 更新视图
       this.getUsersList();
     },
+
     // 编辑用户，显示对话框
     showEditUserDia(user) {
       this.form = user;
       this.dialogFormVisibleEdit = true;
     },
+
     // 删除用户--打开消息盒子
     showDeleUserMsgBox(userId) {
       this.$confirm("删除用户?", "提示", {
@@ -279,6 +289,7 @@ export default {
           });
         });
     },
+
     // 添加用户功能
     async addUser() {
       // 关闭对话框
@@ -300,6 +311,7 @@ export default {
         this.$$message.warning(msg);
       }
     },
+
     // 显示对话框
     showAddUserDia() {
       this.form = {};
@@ -314,8 +326,8 @@ export default {
       // 按照input绑定的query参数，发送请求
       this.getUsersList();
     },
-    // 分页
 
+    // 分页
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
       this.pagesize = val;
@@ -327,15 +339,16 @@ export default {
       this.pagenum = val;
       this.getUsersList();
     },
+
     // 获取用户列表的请求
     async getUsersList() {
       // query 查询参数  可以为空
       // pagenum  当前页码  不能为空
       // pagesize  每页显示条数  不能为空
-
-      // 需要授权的API，必须在请求头中使用Authorization 字段提供 token令牌
-      const AUTH_TOKEN = localStorage.getItem("token");
-      this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
+      // // 需要授权的API，必须在请求头中使用Authorization 字段提供 token令牌
+      // const AUTH_TOKEN = localStorage.getItem("token");
+      // // 将token加在请求头中
+      // this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN;
       const res = await this.$http.get(
         `users?query=${this.query}&pagenum=${this.pagenum}&pagesize=${this.pagesize}`
       );

@@ -29,6 +29,7 @@
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
+            <!-- 通过index的值跳转到指定路径 -->
             <el-menu-item index="users">
               <i class="el-icon-location"></i>
               <span>用户列表</span>
@@ -40,11 +41,11 @@
               <i class="el-icon-location"></i>
               <span>权限管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="role">
               <i class="el-icon-location"></i>
               <span>角色列表</span>
             </el-menu-item>
-            <el-menu-item index="1-1">
+            <el-menu-item index="right">
               <i class="el-icon-location"></i>
               <span>权限列表</span>
             </el-menu-item>
@@ -103,22 +104,23 @@
 export default {
   // newVue之前自动触发
   beforeCreate() {
-    // token没有 登录
     // 获取token
     const token = localStorage.getItem("token");
-    // if token 没有  登录
+    // if token没有-->登录
     if (!token) {
+      // 通过路由跳转到登录页面
       this.$router.push({ name: "login" });
     }
-    // if token有 继续渲染
+    // if token有-->继续渲染
   },
   methods: {
+    // 退出登录事件
     handleSignout() {
       //清除token
       localStorage.clear();
-      // 提示
+      // 提示退出登录
       this.$message.success("退出成功");
-      // 来到login组件
+      // 跳转到login组件
       this.$router.push({ name: "login" });
     }
   }
@@ -133,7 +135,7 @@ export default {
   background-color: #ececec;
 }
 .header .logo img {
-  width: 50%;
+  width: 130px;
   height: 60px;
 }
 .aside {

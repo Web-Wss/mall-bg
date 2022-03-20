@@ -11,7 +11,7 @@
         <el-input v-model="formdata.username"></el-input>
       </el-form-item>
       <el-form-item label="密  码">
-        <el-input v-model="formdata.password"></el-input>
+        <el-input type="password" v-model="formdata.password"></el-input>
       </el-form-item>
       <el-button @click="handleLogin()" class="login-btn" type="primary"
         >登录</el-button
@@ -50,29 +50,9 @@ export default {
         // 2.提示成功
         this.$message.success(msg);
       } else {
+        // 3、登录不成功，提示为啥不成功
         this.$message.error(msg);
       }
-      // 不成功
-      // 1.提示消息
-
-      // this.$http.post("login", this.formdata).then(res => {
-      //   // console.log(res);
-      //   const {
-      //     data,
-      //     meta: { msg, status }
-      //   } = res.data;
-      //   if (status === 200) {
-      //     // 登录成功
-      //     // 1.跳转home
-      //     this.$router.push({ name: "home" });
-      //     // 2.提示成功
-      //     this.$message.success(msg);
-      //   } else {
-      //     this.$message.error(msg);
-      //   }
-      //   // 不成功
-      //   // 1.提示消息
-      // });
     }
   }
 };
@@ -84,6 +64,7 @@ export default {
   background-color: #ececec;
   /* 弹性盒模型 */
   display: flex;
+  /* 水平垂直居中 */
   justify-content: center;
   align-items: center;
 }
