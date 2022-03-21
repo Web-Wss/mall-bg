@@ -5,7 +5,7 @@
     <!--  -->
     <el-row class="addrolebtn">
       <el-col>
-        <el-button type="info" @click="addRole()">添加角色</el-button>
+        <el-button type="success" @click="addRole()">添加角色</el-button>
       </el-col>
     </el-row>
     <!-- 表格 -->
@@ -339,7 +339,7 @@ export default {
     },
     async getRolelist() {
       const res = await this.$http.get(`roles`);
-      console.log(res);
+      // console.log(res);
       this.rolelist = res.data.data;
     }
   }

@@ -5,8 +5,8 @@
 
     <!-- 表格 -->
     <el-table
-      class="el-table"
-      height="600px"
+      class="table"
+      height="747"
       :data="rightlist"
       border
       style="width: 100%"
@@ -39,7 +39,7 @@ export default {
   methods: {
     async getRightlist() {
       const res = await this.$http.get(`rights/list`);
-      console.log(res);
+      // console.log(res);
       this.rightlist = res.data.data;
     }
   }
@@ -48,9 +48,10 @@ export default {
 
 <style>
 .box-card {
-  height: 100%;
+  height: 99%;
 }
-.el-table {
+.table {
   margin-top: 20px;
+  height: 800px;
 }
 </style>
